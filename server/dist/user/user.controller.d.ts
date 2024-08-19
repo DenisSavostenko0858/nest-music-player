@@ -1,12 +1,49 @@
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { RegisterUserDto } from './dto/register-user.dto';
+import { LoginUserDto } from "./dto/login-user.dto";
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
-    create(createUserDto: CreateUserDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateUserDto: UpdateUserDto): string;
-    remove(id: string): string;
+    register(createUserDto: RegisterUserDto): Promise<{
+        userNew: {
+            id: number;
+            name: string;
+            email: string;
+            password: string;
+            lastName: string | null;
+            age: Date | null;
+            about: string | null;
+        };
+        token: any;
+    }>;
+    login(loginUserDto: LoginUserDto): Promise<{
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            password: string;
+            lastName: string | null;
+            age: Date | null;
+            about: string | null;
+        };
+        token: any;
+    }>;
+    findAll(): Promise<{
+        id: number;
+        name: string;
+        email: string;
+        password: string;
+        lastName: string | null;
+        age: Date | null;
+        about: string | null;
+    }[]>;
+    findOne(id: string): Promise<{
+        id: number;
+        name: string;
+        email: string;
+        password: string;
+        lastName: string | null;
+        age: Date | null;
+        about: string | null;
+    }>;
 }

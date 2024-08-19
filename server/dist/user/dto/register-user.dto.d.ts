@@ -1,6 +1,5 @@
-export declare class CreateUserDto {
+export declare class RegisterUserDto {
     name: string;
-    surname: string;
     email: string;
     password: string;
 }
