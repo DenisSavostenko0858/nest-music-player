@@ -23,7 +23,6 @@ model User {
   about     String ?
 
 }
-
 model Comment {
   id          Int @default(autoincrement()) @id
   text        String
