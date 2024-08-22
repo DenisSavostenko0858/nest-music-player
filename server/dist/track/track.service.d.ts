@@ -1,9 +1,11 @@
 import { CreateNewTrackDto } from './dto/create-new-track.dto';
 import { PrismaService } from "../prisma.service";
+import { FileService } from "../file/file.service";
 export declare class TrackService {
     private readonly prisma;
-    constructor(prisma: PrismaService);
-    create(createTrackDto: CreateNewTrackDto): Promise<{
+    private readonly fileService;
+    constructor(prisma: PrismaService, fileService: FileService);
+    create(createTrackDto: CreateNewTrackDto, picture: any, audio: any): Promise<{
         id: number;
         name: string;
         artistId: number;

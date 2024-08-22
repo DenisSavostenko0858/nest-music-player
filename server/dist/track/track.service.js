@@ -12,20 +12,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TrackService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma.service");
+const file_service_1 = require("../file/file.service");
 let TrackService = class TrackService {
-    constructor(prisma) {
+    constructor(prisma, fileService) {
         this.prisma = prisma;
+        this.fileService = fileService;
     }
-    async create(createTrackDto) {
-        const { name, artistId, picture, text, audio } = createTrackDto;
+    async create(createTrackDto, picture, audio) {
+        const audioPath = this.fileService.createFile(file_service_1.FileType.AUDIO, audio);
+        const imagePath = this.fileService.createFile(file_service_1.FileType.IMAGE, picture);
+        const { name, artistId, text } = createTrackDto;
         const validMusic = await this.prisma.music.findFirst({
-            where: { text: text, audio: audio }
+            where: { text: text }
         });
         if (validMusic) {
             throw new common_1.UnauthorizedException('Плагиат!');
         }
         const newtrack = await this.prisma.music.create({
-            data: { name, artistId, picture, text, audio },
+            data: { name, artistId, picture: imagePath, text, audio: audioPath },
         });
         return newtrack;
     }
@@ -48,6 +52,7 @@ let TrackService = class TrackService {
 exports.TrackService = TrackService;
 exports.TrackService = TrackService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        file_service_1.FileService])
 ], TrackService);
 //# sourceMappingURL=track.service.js.map

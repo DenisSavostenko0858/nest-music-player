@@ -11,13 +11,14 @@ const common_1 = require("@nestjs/common");
 const track_service_1 = require("./track.service");
 const track_controller_1 = require("./track.controller");
 const prisma_service_1 = require("../prisma.service");
+const file_service_1 = require("../file/file.service");
 let TrackModule = class TrackModule {
 };
 exports.TrackModule = TrackModule;
 exports.TrackModule = TrackModule = __decorate([
     (0, common_1.Module)({
         controllers: [track_controller_1.TrackController],
-        providers: [track_service_1.TrackService, prisma_service_1.PrismaService],
+        providers: [track_service_1.TrackService, file_service_1.FileService, prisma_service_1.PrismaService],
     })
 ], TrackModule);
 //# sourceMappingURL=track.module.js.map

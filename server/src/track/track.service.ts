@@ -1,17 +1,22 @@
 import {Injectable, UnauthorizedException} from '@nestjs/common';
-import { CreateNewTrackDto } from './dto/create-new-track.dto';
+import {CreateNewTrackDto} from './dto/create-new-track.dto';
 // import { UpdateTrackDto } from './dto/update-track.dto';
 import {PrismaService} from "../prisma.service";
+import {FileService, FileType} from "../file/file.service";
 
 @Injectable()
 export class TrackService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService,
+              private readonly fileService: FileService,) {}
 
-  async create(createTrackDto: CreateNewTrackDto) {
-    const {name, artistId, picture, text, audio} = createTrackDto;
+  async create(createTrackDto: CreateNewTrackDto, picture:any, audio:any) {
+    const audioPath = this.fileService.createFile(FileType.AUDIO, audio)
+    const imagePath = this.fileService.createFile(FileType.IMAGE, picture)
+
+    const {name, artistId, text} = createTrackDto;
 
     const validMusic = await this.prisma.music.findFirst({
-      where: { text: text, audio: audio }
+      where: { text: text}
     })
 
     if (validMusic) {
@@ -19,7 +24,7 @@ export class TrackService {
     }
 
     const newtrack = await this.prisma.music.create({
-      data: {name, artistId, picture, text, audio},
+      data: {name, artistId, picture: imagePath, text, audio: audioPath},
     })
 
     return newtrack

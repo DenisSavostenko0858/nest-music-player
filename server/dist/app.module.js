@@ -13,12 +13,20 @@ const app_service_1 = require("./app.service");
 const user_module_1 = require("./user/user.module");
 const track_module_1 = require("./track/track.module");
 const comment_module_1 = require("./comment/comment.module");
+const file_module_1 = require("./file/file.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path = require("node:path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, track_module_1.TrackModule, comment_module_1.CommentModule],
+        imports: [
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: path.resolve(__dirname, 'static')
+            }),
+            user_module_1.UserModule, track_module_1.TrackModule, comment_module_1.CommentModule, file_module_1.FileModule
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

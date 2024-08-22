@@ -13,6 +13,15 @@ export declare class CommentController {
         updatedAt: Date;
     }>;
     findAll(): import(".prisma/client").Prisma.PrismaPromise<({
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            password: string;
+            lastName: string | null;
+            age: Date | null;
+            about: string | null;
+        };
         music: {
             id: number;
             name: string;
@@ -23,15 +32,6 @@ export declare class CommentController {
             audio: string;
             createdAt: Date;
             updatedAt: Date;
-        };
-        user: {
-            id: number;
-            name: string;
-            email: string;
-            password: string;
-            lastName: string | null;
-            age: Date | null;
-            about: string | null;
         };
     } & {
         id: number;
@@ -43,6 +43,15 @@ export declare class CommentController {
         updatedAt: Date;
     })[]>;
     findOne(id: string): import(".prisma/client").Prisma.Prisma__CommentClient<{
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            password: string;
+            lastName: string | null;
+            age: Date | null;
+            about: string | null;
+        };
         music: {
             id: number;
             name: string;
@@ -53,15 +62,6 @@ export declare class CommentController {
             audio: string;
             createdAt: Date;
             updatedAt: Date;
-        };
-        user: {
-            id: number;
-            name: string;
-            email: string;
-            password: string;
-            lastName: string | null;
-            age: Date | null;
-            about: string | null;
         };
     } & {
         id: number;
