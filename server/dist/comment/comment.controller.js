@@ -12,47 +12,47 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TrackController = void 0;
+exports.CommentController = void 0;
 const common_1 = require("@nestjs/common");
-const track_service_1 = require("./track.service");
-const create_new_track_dto_1 = require("./dto/create-new-track.dto");
-let TrackController = class TrackController {
-    constructor(trackService) {
-        this.trackService = trackService;
+const comment_service_1 = require("./comment.service");
+const create_comment_dto_1 = require("./dto/create-comment.dto");
+let CommentController = class CommentController {
+    constructor(commentService) {
+        this.commentService = commentService;
     }
-    create(createTrackDto) {
-        return this.trackService.create(createTrackDto);
+    create(createCommentDto) {
+        return this.commentService.create(createCommentDto);
     }
     findAll() {
-        return this.trackService.findAll();
+        return this.commentService.findAll();
     }
     findOne(id) {
-        return this.trackService.findOne(+id);
+        return this.commentService.findOne(+id);
     }
 };
-exports.TrackController = TrackController;
+exports.CommentController = CommentController;
 __decorate([
     (0, common_1.Post)('/create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_new_track_dto_1.CreateNewTrackDto]),
+    __metadata("design:paramtypes", [create_comment_dto_1.CreateCommentDto]),
     __metadata("design:returntype", void 0)
-], TrackController.prototype, "create", null);
+], CommentController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)('/list'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], TrackController.prototype, "findAll", null);
+], CommentController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], TrackController.prototype, "findOne", null);
-exports.TrackController = TrackController = __decorate([
-    (0, common_1.Controller)('track'),
-    __metadata("design:paramtypes", [track_service_1.TrackService])
-], TrackController);
-//# sourceMappingURL=track.controller.js.map
+], CommentController.prototype, "findOne", null);
+exports.CommentController = CommentController = __decorate([
+    (0, common_1.Controller)('comment'),
+    __metadata("design:paramtypes", [comment_service_1.CommentService])
+], CommentController);
+//# sourceMappingURL=comment.controller.js.map

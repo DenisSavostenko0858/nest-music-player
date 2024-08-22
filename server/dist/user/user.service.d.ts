@@ -39,6 +39,16 @@ export declare class UserService {
         about: string | null;
     }[]>;
     findOne(id: number): Promise<{
+        comments: {
+            id: number;
+            text: string;
+            musicId: number;
+            userId: number;
+            rating: number | null;
+            createdAt: Date;
+            updatedAt: Date;
+        }[];
+    } & {
         id: number;
         name: string;
         email: string;

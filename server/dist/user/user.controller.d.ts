@@ -38,6 +38,16 @@ export declare class UserController {
         about: string | null;
     }[]>;
     findOne(id: string): Promise<{
+        comments: {
+            id: number;
+            text: string;
+            musicId: number;
+            userId: number;
+            rating: number | null;
+            createdAt: Date;
+            updatedAt: Date;
+        }[];
+    } & {
         id: number;
         name: string;
         email: string;

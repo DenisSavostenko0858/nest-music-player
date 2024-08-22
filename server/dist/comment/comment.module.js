@@ -6,18 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TrackModule = void 0;
+exports.CommentModule = void 0;
 const common_1 = require("@nestjs/common");
-const track_service_1 = require("./track.service");
-const track_controller_1 = require("./track.controller");
+const comment_service_1 = require("./comment.service");
+const comment_controller_1 = require("./comment.controller");
 const prisma_service_1 = require("../prisma.service");
-let TrackModule = class TrackModule {
+let CommentModule = class CommentModule {
 };
-exports.TrackModule = TrackModule;
-exports.TrackModule = TrackModule = __decorate([
+exports.CommentModule = CommentModule;
+exports.CommentModule = CommentModule = __decorate([
     (0, common_1.Module)({
-        controllers: [track_controller_1.TrackController],
-        providers: [track_service_1.TrackService, prisma_service_1.PrismaService],
+        controllers: [comment_controller_1.CommentController],
+        providers: [comment_service_1.CommentService, prisma_service_1.PrismaService],
     })
-], TrackModule);
-//# sourceMappingURL=track.module.js.map
+], CommentModule);
+//# sourceMappingURL=comment.module.js.map

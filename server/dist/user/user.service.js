@@ -56,6 +56,9 @@ let UserService = class UserService {
     async findOne(id) {
         return this.prisma.user.findUnique({
             where: { id },
+            include: {
+                comments: true
+            }
         });
     }
 };

@@ -9,45 +9,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TrackService = void 0;
+exports.CommentService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma.service");
-let TrackService = class TrackService {
+let CommentService = class CommentService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async create(createTrackDto) {
-        const { name, artistId, picture, text, audio } = createTrackDto;
-        const validMusic = await this.prisma.music.findFirst({
-            where: { text: text, audio: audio }
+    async create(createCommentDto) {
+        const { text, musicId, userId, rating } = createCommentDto;
+        const newComment = await this.prisma.comment.create({
+            data: { text, rating,
+                music: {
+                    connect: { id: musicId }
+                },
+                user: {
+                    connect: { id: userId }
+                } }
         });
-        if (validMusic) {
-            throw new common_1.UnauthorizedException('Плагиат!');
-        }
-        const newtrack = await this.prisma.music.create({
-            data: { name, artistId, picture, text, audio },
-        });
-        return newtrack;
+        return newComment;
     }
-    async findAll() {
-        return this.prisma.music.findMany();
+    findAll() {
+        return this.prisma.comment.findMany({ include: {
+                user: true,
+                music: true
+            } });
     }
     findOne(id) {
-        return this.prisma.music.findUnique({
+        return this.prisma.comment.findUnique({
             where: { id },
             include: {
-                comments: {
-                    include: {
-                        user: true
-                    }
-                }
+                user: true,
+                music: true
             }
         });
     }
 };
-exports.TrackService = TrackService;
-exports.TrackService = TrackService = __decorate([
+exports.CommentService = CommentService;
+exports.CommentService = CommentService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], TrackService);
-//# sourceMappingURL=track.service.js.map
+], CommentService);
+//# sourceMappingURL=comment.service.js.map

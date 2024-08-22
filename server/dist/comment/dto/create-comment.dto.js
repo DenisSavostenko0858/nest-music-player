@@ -9,42 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateTrackDto = void 0;
-const mapped_types_1 = require("@nestjs/mapped-types");
-const create_new_track_dto_1 = require("./create-new-track.dto");
+exports.CreateCommentDto = void 0;
 const class_validator_1 = require("class-validator");
-class UpdateTrackDto extends (0, mapped_types_1.PartialType)(create_new_track_dto_1.CreateNewTrackDto) {
+class CreateCommentDto {
 }
-exports.UpdateTrackDto = UpdateTrackDto;
+exports.CreateCommentDto = CreateCommentDto;
 __decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateTrackDto.prototype, "name", void 0);
+], CreateCommentDto.prototype, "text", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], UpdateTrackDto.prototype, "artistId", void 0);
+], CreateCommentDto.prototype, "musicId", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateTrackDto.prototype, "text", void 0);
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateCommentDto.prototype, "userId", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Max)(5),
     __metadata("design:type", Number)
-], UpdateTrackDto.prototype, "listens", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateTrackDto.prototype, "picture", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateTrackDto.prototype, "audio", void 0);
-//# sourceMappingURL=update-track.dto.js.map
+], CreateCommentDto.prototype, "rating", void 0);
+//# sourceMappingURL=create-comment.dto.js.map
