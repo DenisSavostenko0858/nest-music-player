@@ -1,8 +1,9 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles} from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles, Query} from '@nestjs/common';
 import { TrackService } from './track.service';
 import { CreateNewTrackDto } from './dto/create-new-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
 import {FileFieldsInterceptor, FileInterceptor} from "@nestjs/platform-express";
+import {query} from "express";
 
 @Controller('track')
 export class TrackController {
@@ -19,14 +20,26 @@ export class TrackController {
   }
 
   @Get('/list')
-  findAll() {
-    return this.trackService.findAll();
+  findAll(@Query('count') count: number,
+  @Query('offset') offset: number) {
+    return this.trackService.findAll(count, offset);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.trackService.findOne(+id);
   }
+
+  @Get('/list/search')
+  search(@Query('query') query: string) {
+    return this.trackService.search(query)
+  }
+
+  @Post('/listen/:id')
+  listen(@Param('id') id: string) {
+    return this.trackService.listen(+id);
+  }
+
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateTrackDto: UpdateTrackDto) {

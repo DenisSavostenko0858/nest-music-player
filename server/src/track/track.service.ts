@@ -3,6 +3,8 @@ import {CreateNewTrackDto} from './dto/create-new-track.dto';
 // import { UpdateTrackDto } from './dto/update-track.dto';
 import {PrismaService} from "../prisma.service";
 import {FileService, FileType} from "../file/file.service";
+import {skip} from "rxjs";
+import {Track} from "./entities/track.entity";
 
 @Injectable()
 export class TrackService {
@@ -30,8 +32,11 @@ export class TrackService {
     return newtrack
   }
 
-  async findAll() {
-    return this.prisma.music.findMany()
+  async findAll(count = 10, offset = 0) {
+    return this.prisma.music.findMany({
+      skip: Number(offset),
+      take: Number(count)
+    })
   }
 
   findOne(id: number) {
@@ -47,6 +52,34 @@ export class TrackService {
     })
   }
 
+  async listen(id: number){
+    const track = await this.prisma.music.findUnique({
+      where:{id}
+    })
+
+    if (!track){
+      throw new UnauthorizedException('Аудиозапись не найдена')
+    }
+    track.listens += 1;
+
+    await this.prisma.music.update({
+      where: { id: track.id },
+      data: { listens: track.listens}
+    })
+    return track;
+  }
+
+  async search(query: string): Promise<Track[]> {
+    const tracks = await this.prisma.music.findMany({
+      where:{
+        name: {
+          contains: query,
+          mode: 'insensitive'
+        }
+      }
+    })
+    return tracks
+  }
   // update(id: number, updateTrackDto: UpdateTrackDto) {
   //   return `This action updates a #${id} track`;
   // }

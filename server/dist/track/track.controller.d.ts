@@ -3,7 +3,7 @@ import { CreateNewTrackDto } from './dto/create-new-track.dto';
 export declare class TrackController {
     private readonly trackService;
     constructor(trackService: TrackService);
-    create(createTrackDto: CreateNewTrackDto): Promise<{
+    create(files: any, createTrackDto: CreateNewTrackDto): Promise<{
         id: number;
         name: string;
         artistId: number;
@@ -14,7 +14,7 @@ export declare class TrackController {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    findAll(): Promise<{
+    findAll(count: number, offset: number): Promise<{
         id: number;
         name: string;
         artistId: number;
@@ -56,4 +56,16 @@ export declare class TrackController {
         createdAt: Date;
         updatedAt: Date;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
+    search(query: string): Promise<import("./entities/track.entity").Track[]>;
+    listen(id: string): Promise<{
+        id: number;
+        name: string;
+        artistId: number;
+        text: string;
+        listens: number;
+        picture: string;
+        audio: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
 }

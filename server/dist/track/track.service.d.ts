@@ -1,6 +1,7 @@
 import { CreateNewTrackDto } from './dto/create-new-track.dto';
 import { PrismaService } from "../prisma.service";
 import { FileService } from "../file/file.service";
+import { Track } from "./entities/track.entity";
 export declare class TrackService {
     private readonly prisma;
     private readonly fileService;
@@ -16,7 +17,7 @@ export declare class TrackService {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    findAll(): Promise<{
+    findAll(count?: number, offset?: number): Promise<{
         id: number;
         name: string;
         artistId: number;
@@ -58,4 +59,16 @@ export declare class TrackService {
         createdAt: Date;
         updatedAt: Date;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
+    listen(id: number): Promise<{
+        id: number;
+        name: string;
+        artistId: number;
+        text: string;
+        listens: number;
+        picture: string;
+        audio: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    search(query: string): Promise<Track[]>;
 }

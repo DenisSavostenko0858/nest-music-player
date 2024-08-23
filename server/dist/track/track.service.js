@@ -33,8 +33,11 @@ let TrackService = class TrackService {
         });
         return newtrack;
     }
-    async findAll() {
-        return this.prisma.music.findMany();
+    async findAll(count = 10, offset = 0) {
+        return this.prisma.music.findMany({
+            skip: Number(offset),
+            take: Number(count)
+        });
     }
     findOne(id) {
         return this.prisma.music.findUnique({
@@ -47,6 +50,31 @@ let TrackService = class TrackService {
                 }
             }
         });
+    }
+    async listen(id) {
+        const track = await this.prisma.music.findUnique({
+            where: { id }
+        });
+        if (!track) {
+            throw new common_1.UnauthorizedException('Аудиозапись не найдена');
+        }
+        track.listens += 1;
+        await this.prisma.music.update({
+            where: { id: track.id },
+            data: { listens: track.listens }
+        });
+        return track;
+    }
+    async search(query) {
+        const tracks = await this.prisma.music.findMany({
+            where: {
+                name: {
+                    contains: query,
+                    mode: 'insensitive'
+                }
+            }
+        });
+        return tracks;
     }
 };
 exports.TrackService = TrackService;
