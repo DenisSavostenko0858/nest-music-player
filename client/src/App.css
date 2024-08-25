@@ -7,7 +7,7 @@
 
 .logo {
   height: 6em;
-  padding: 1.5em;
+  padding: 0.8em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.container-content{
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-between;
+  width: 100%;
+  flex-direction: row;
+}
+
