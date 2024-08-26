@@ -26,7 +26,7 @@ export class TrackService {
     }
 
     const newtrack = await this.prisma.music.create({
-      data: {name, artistId, picture: imagePath, text, audio: audioPath},
+      data: {name, artistId: 2, picture: imagePath, text, audio: audioPath},
     })
 
     return newtrack

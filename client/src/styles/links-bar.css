@@ -4,3 +4,30 @@
 
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
+.btn{
+    background-color: #202020;
+    border: 6px solid #2b2a2a;
+    border-left: none;
+    border-right: none;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+
+    transition: 0.3s;
+}
+
+.btn:hover{
+    filter: drop-shadow(0 0 2em #646cffaa);
+
+    transition: 0.3s;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
