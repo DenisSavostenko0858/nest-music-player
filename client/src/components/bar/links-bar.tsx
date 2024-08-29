@@ -6,7 +6,6 @@ import {Context} from "../../main.tsx";
 const LinksBar = observer(() => {
     const context = useContext(Context);
 
-
     return (
         <>
             <div className="container-bar">
@@ -23,16 +22,22 @@ const LinksBar = observer(() => {
                     {context?.user.isAuth ?
                         <>
                             <div className="btn-container">
-                                <a href={'/favorite'} className="btn">Нравиться</a>
+                                <a href={'/favorite'} className="btn">Нравится</a>
                             </div>
                             <div className="btn-container">
                                 <a href={'/profile'} className="btn">Профиль</a>
                             </div>
                         </>
-                    :
-                    <div className="btn-container">
-                        <a href={'/login'} className="btn">Войти</a>
-                    </div>
+                        :
+                        <>
+                            <div className="btn-container">
+                                <a href={'/login'} className="btn">Войти</a>
+                            </div>
+                            <div className="btn-container">
+                                <a href={'/register'} className="btn">Регистрация</a>
+                            </div>
+                        </>
+
                     }
                 </div>
             </div>

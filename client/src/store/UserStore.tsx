@@ -6,14 +6,12 @@ interface CustomJwtPayload extends JwtPayload {
     id: number;
     name: string;
     email: string;
-    role: string;
 }
 
 export type UserType = {
     id: number;
     name: string;
     email: string;
-    role: string;
 }
 
 export default class UserStore {
@@ -41,7 +39,6 @@ export default class UserStore {
         return this._user;
     }
 
-    // Метод для проверки аутентификации
     checkAuth() {
         const token = localStorage.getItem('token');
         if (token) {
@@ -50,8 +47,7 @@ export default class UserStore {
                 this.setUser({
                     id: user.id,
                     name: user.name,
-                    email: user.email,
-                    role: user.role,
+                    email: user.email
                 });
                 this.setIsAuth(true);
             } catch (error) {

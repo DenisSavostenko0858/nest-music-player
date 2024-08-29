@@ -31,3 +31,22 @@
     margin-bottom: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
+
+#btn-header-menu{
+    text-decoration: none;
+    color: black;
+}
+
+#btn-header-menu:hover{
+    color: #6c6c6c;
+}
+
+#btn-header-icon{
+    color: white;
+    transition: 0.3s;
+}
+
+#btn-header-icon:hover{
+    color: #242424;
+    transition: 0.3s;
+}

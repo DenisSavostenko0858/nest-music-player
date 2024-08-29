@@ -9,12 +9,15 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-// import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import {observer} from "mobx-react-lite";
+import {Context} from "../../main.tsx";
+import {useContext} from "react";
+import {logout} from "../../http/userAPI.tsx";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -46,7 +49,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -56,7 +58,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function PrimarySearchAppBar() {
+const PrimarySearchAppBar = observer(() => {
+    const context = useContext(Context);
+
+    const logOut = () => {
+        logout();
+        window.location.reload();
+    }
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
@@ -99,8 +108,17 @@ export default function PrimarySearchAppBar() {
                 open={isMenuOpen}
                 onClose={handleMenuClose}
             >
-                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+                {context?.user.isAuth ?
+                <>
+                    <MenuItem onClick={handleMenuClose}><a href='/profile' id='btn-header-menu'>Профиль</a></MenuItem>
+                    <MenuItem onClick={handleMenuClose}><button onClick={()=> logOut()}>Выйти</button></MenuItem>
+                </>
+                    :
+                <>
+                    <MenuItem onClick={handleMenuClose}><a href='/register' id='btn-header-menu'>Регистрация</a></MenuItem>
+                    <MenuItem onClick={handleMenuClose}><a href='/login' id='btn-header-menu'>Войти</a></MenuItem>
+                </>
+                }
             </Menu>
     );
 
@@ -123,23 +141,23 @@ export default function PrimarySearchAppBar() {
         >
             <MenuItem>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="error">
+                    <Badge badgeContent={12} color="error">
                         <MailIcon />
                     </Badge>
                 </IconButton>
-                <p>Messages</p>
+                <p>Сообщения</p>
             </MenuItem>
             <MenuItem>
                 <IconButton
                     size="large"
-                    aria-label="show 17 new notifications"
+                    aria-label="show 12 new notifications"
                     color="inherit"
                 >
-                    <Badge badgeContent={17} color="error">
+                    <Badge badgeContent={12} color="error">
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                <p>Уведомления</p>
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
@@ -151,7 +169,7 @@ export default function PrimarySearchAppBar() {
                 >
                     <AccountCircle />
                 </IconButton>
-                <p>Profile</p>
+                <p>Профиль</p>
             </MenuItem>
         </Menu>
     );
@@ -181,31 +199,37 @@ export default function PrimarySearchAppBar() {
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="error">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
+                        <a href='/profile' id='btn-header-icon'>
+                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                <Badge badgeContent={12} color="error">
+                                    <MailIcon />
+                                </Badge>
+                            </IconButton>
+                        </a>
+                        <a href='/profile' id='btn-header-icon'>
+                            <IconButton
+                                size="large"
+                                aria-label="show 17 new notifications"
+                                color="inherit"
+                            >
+                                <Badge badgeContent={12} color="error">
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
+                        </a>
+                        <a id='btn-header-icon'>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                        </a>
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -225,4 +249,6 @@ export default function PrimarySearchAppBar() {
             {renderMenu}
         </Box>
     );
-}
+});
+
+export default PrimarySearchAppBar;
