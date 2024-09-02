@@ -4,14 +4,10 @@ import { JwtPayload } from "jwt-decode";
 
 interface CustomJwtPayload extends JwtPayload {
     id: number;
-    name: string;
-    email: string;
 }
 
 export type UserType = {
     id: number;
-    name: string;
-    email: string;
 }
 
 export default class UserStore {
@@ -45,9 +41,7 @@ export default class UserStore {
             try {
                 const user = jwtDecode<CustomJwtPayload>(token);
                 this.setUser({
-                    id: user.id,
-                    name: user.name,
-                    email: user.email
+                    id: user.id
                 });
                 this.setIsAuth(true);
             } catch (error) {

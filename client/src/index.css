@@ -17,3 +17,9 @@
   justify-content: center;
   padding: 80px 150px 80px 150px;
 }
+
+.container{
+  display: flex;
+  height: 520px;
+  justify-content: center;
+}

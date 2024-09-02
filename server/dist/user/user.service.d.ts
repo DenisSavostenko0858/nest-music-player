@@ -1,5 +1,6 @@
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
+import { UpdateUserDto } from "./dto/update-user.dto";
 import { PrismaService } from "../prisma.service";
 export declare class UserService {
     private readonly prisma;
@@ -27,6 +28,9 @@ export declare class UserService {
             age: Date | null;
             about: string | null;
         };
+        token: any;
+    }>;
+    checkUser(updateUserDto: UpdateUserDto): Promise<{
         token: any;
     }>;
     findAll(): Promise<{

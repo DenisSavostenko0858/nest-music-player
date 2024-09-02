@@ -50,6 +50,17 @@ let UserService = class UserService {
         const token = this.generateToken(user.id);
         return { user, token };
     }
+    async checkUser(updateUserDto) {
+        const { id } = updateUserDto;
+        const user = await this.prisma.user.findUnique({
+            where: { id }
+        });
+        if (!user) {
+            throw new Error('Пользователь не найден');
+        }
+        const token = this.generateToken(user.id);
+        return { token };
+    }
     async findAll() {
         return this.prisma.user.findMany();
     }

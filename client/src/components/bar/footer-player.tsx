@@ -80,7 +80,7 @@ const AudioPlayer = () => {
                     </IconButton>
                 </Box>
             </Box>
-            <audio ref={audioRef} src="http://localhost:5000/audio/492a4394-c4cf-4f08-82ff-93ff2a84d81e.mp3" preload="auto" />
+            <audio ref={audioRef} src="" preload="auto" />
         </Card>
     );
 };

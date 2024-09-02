@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 5000;
 async function bootstrap() {
     try {
         const app = await core_1.NestFactory.create(app_module_1.AppModule);
+        app.enableCors();
         await app.listen(PORT);
         console.log(`Сервер запущен http://localhost:${PORT}/api`);
     }

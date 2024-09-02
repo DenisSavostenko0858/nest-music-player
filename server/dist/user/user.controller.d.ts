@@ -1,5 +1,6 @@
 import { UserService } from './user.service';
 import { RegisterUserDto } from './dto/register-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginUserDto } from "./dto/login-user.dto";
 export declare class UserController {
     private readonly userService;
@@ -55,5 +56,8 @@ export declare class UserController {
         lastName: string | null;
         age: Date | null;
         about: string | null;
+    }>;
+    checkUser(updateUserDto: UpdateUserDto): Promise<{
+        token: any;
     }>;
 }
