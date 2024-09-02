@@ -1,11 +1,11 @@
 import '../../styles/home-page.css'
+import TrackList from "../TrackServices/TrackList.tsx";
 
 function HomePage(){
     return (
         <>
             <div className="container">
-                <h1 className="logo">Home Page</h1>
-                <h2 className="logo">Добро пожаловать</h2>
+                <TrackList />
             </div>
         </>
     )

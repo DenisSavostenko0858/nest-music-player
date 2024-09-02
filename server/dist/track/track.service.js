@@ -29,14 +29,17 @@ let TrackService = class TrackService {
             throw new common_1.UnauthorizedException('Плагиат!');
         }
         const newtrack = await this.prisma.music.create({
-            data: { name, artistId: 2, picture: imagePath, text, audio: audioPath },
+            data: { name, artistId: 1, picture: imagePath, text, audio: audioPath },
         });
         return newtrack;
     }
     async findAll(count = 10, offset = 0) {
         return this.prisma.music.findMany({
             skip: Number(offset),
-            take: Number(count)
+            take: Number(count),
+            include: {
+                user: true,
+            }
         });
     }
     findOne(id) {
@@ -75,6 +78,15 @@ let TrackService = class TrackService {
             }
         });
         return tracks;
+    }
+    async remove(id) {
+        await this.prisma.comment.deleteMany({
+            where: { musicId: id }
+        });
+        const track = await this.prisma.music.delete({
+            where: { id },
+        });
+        return track;
     }
 };
 exports.TrackService = TrackService;

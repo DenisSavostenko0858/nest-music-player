@@ -46,8 +46,8 @@ export class TrackController {
   //   return this.trackService.update(+id, updateTrackDto);
   // }
   //
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.trackService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.trackService.remove(+id);
+  }
 }

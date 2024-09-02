@@ -17,7 +17,17 @@ export declare class TrackService {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    findAll(count?: number, offset?: number): Promise<{
+    findAll(count?: number, offset?: number): Promise<({
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            password: string;
+            lastName: string | null;
+            age: Date | null;
+            about: string | null;
+        };
+    } & {
         id: number;
         name: string;
         artistId: number;
@@ -27,7 +37,7 @@ export declare class TrackService {
         audio: string;
         createdAt: Date;
         updatedAt: Date;
-    }[]>;
+    })[]>;
     findOne(id: number): import(".prisma/client").Prisma.Prisma__MusicClient<{
         comments: ({
             user: {
@@ -71,4 +81,15 @@ export declare class TrackService {
         updatedAt: Date;
     }>;
     search(query: string): Promise<Track[]>;
+    remove(id: number): Promise<{
+        id: number;
+        name: string;
+        artistId: number;
+        text: string;
+        listens: number;
+        picture: string;
+        audio: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
 }

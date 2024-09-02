@@ -3,7 +3,6 @@ import {CreateNewTrackDto} from './dto/create-new-track.dto';
 // import { UpdateTrackDto } from './dto/update-track.dto';
 import {PrismaService} from "../prisma.service";
 import {FileService, FileType} from "../file/file.service";
-import {skip} from "rxjs";
 import {Track} from "./entities/track.entity";
 
 @Injectable()
@@ -26,7 +25,7 @@ export class TrackService {
     }
 
     const newtrack = await this.prisma.music.create({
-      data: {name, artistId: 2, picture: imagePath, text, audio: audioPath},
+      data: {name, artistId: 1, picture: imagePath, text, audio: audioPath},
     })
 
     return newtrack
@@ -35,7 +34,10 @@ export class TrackService {
   async findAll(count = 10, offset = 0) {
     return this.prisma.music.findMany({
       skip: Number(offset),
-      take: Number(count)
+      take: Number(count),
+      include:{
+        user: true,
+      }
     })
   }
 
@@ -84,7 +86,13 @@ export class TrackService {
   //   return `This action updates a #${id} track`;
   // }
   //
-  // remove(id: number) {
-  //   return `This action removes a #${id} track`;
-  // }
+  async remove(id: number) {
+    await this.prisma.comment.deleteMany({
+      where: {musicId: id}
+    })
+    const track = await this.prisma.music.delete({
+      where:{id},
+    })
+    return track
+  }
 }

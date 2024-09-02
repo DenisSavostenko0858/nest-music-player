@@ -37,6 +37,9 @@ let TrackController = class TrackController {
     listen(id) {
         return this.trackService.listen(+id);
     }
+    remove(id) {
+        return this.trackService.remove(+id);
+    }
 };
 exports.TrackController = TrackController;
 __decorate([
@@ -80,6 +83,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], TrackController.prototype, "listen", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], TrackController.prototype, "remove", null);
 exports.TrackController = TrackController = __decorate([
     (0, common_1.Controller)('track'),
     __metadata("design:paramtypes", [track_service_1.TrackService])
