@@ -21,7 +21,7 @@ let FileService = class FileService {
         try {
             const fileExtension = file.originalname.split(".").pop();
             const fileName = uuid.v4() + '.' + fileExtension;
-            const filePath = path.resolve(__dirname, '..', 'static', type);
+            const filePath = path.resolve(__dirname, '../..', 'static', type);
             if (!fs.existsSync(filePath)) {
                 fs.mkdirSync(filePath, { recursive: true });
             }
@@ -32,7 +32,7 @@ let FileService = class FileService {
             throw new common_1.HttpException(e.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    deleteFile(fileName) {
+    async deleteFile(fileName) {
     }
 };
 exports.FileService = FileService;

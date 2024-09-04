@@ -14,7 +14,7 @@ export class FileService {
         try {
             const fileExtension = file.originalname.split(".").pop();
             const fileName = uuid.v4() + '.' + fileExtension
-            const filePath = path.resolve(__dirname, '..', 'static', type)
+            const filePath = path.resolve(__dirname, '../..', 'static', type)
 
             if(!fs.existsSync(filePath)){
                 fs.mkdirSync(filePath, { recursive: true });
@@ -28,7 +28,12 @@ export class FileService {
         }
     }
 
-    deleteFile(fileName: string){
-
+    async deleteFile(fileName: string){
+        // try {
+        //     const filePath = path.resolve(__dirname, '..', 'static', fileName);
+        //     fs.unlink(filePath);
+        // } catch (e) {
+        //     throw new HttpException(`Failed to delete file: ${e.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
+        // }
     }
 }

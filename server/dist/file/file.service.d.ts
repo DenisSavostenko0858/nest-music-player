@@ -4,5 +4,5 @@ export declare enum FileType {
 }
 export declare class FileService {
     createFile(type: FileType, file: any): string;
-    deleteFile(fileName: string): void;
+    deleteFile(fileName: string): Promise<void>;
 }

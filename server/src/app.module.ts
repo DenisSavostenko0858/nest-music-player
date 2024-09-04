@@ -11,7 +11,7 @@ import * as path from "node:path";
 @Module({
   imports: [
       ServeStaticModule.forRoot({
-        rootPath: path.resolve(__dirname, 'static')
+        rootPath: path.resolve(__dirname, '../static')
       }),
       UserModule, TrackModule, CommentModule, FileModule],
   controllers: [AppController],

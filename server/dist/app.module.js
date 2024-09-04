@@ -23,7 +23,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             serve_static_1.ServeStaticModule.forRoot({
-                rootPath: path.resolve(__dirname, 'static')
+                rootPath: path.resolve(__dirname, '../static')
             }),
             user_module_1.UserModule, track_module_1.TrackModule, comment_module_1.CommentModule, file_module_1.FileModule
         ],
