@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { InterfaceTrack } from './interface/interface-track.tsx';
 import {observer} from "mobx-react-lite";
 
-const TrackList = observer(() => {
+const TrackList = observer(({ onTrackSelect }) => {
     const [tracks, setTracks] = useState<InterfaceTrack[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setErrorMessage] = useState<string | null>(null);
@@ -33,7 +33,7 @@ const TrackList = observer(() => {
             <div className="track-container">
                 {tracks.map(track => (
                     <div key={track.id} className="track-item">
-                        <div className="track-bar-left">
+                        <div className="track-bar-left" onClick={() => onTrackSelect(track)}>
                             <img className="image-track" src={'http://localhost:5000/' + track.picture} alt={track.name}/>
                             <div className="info">
                                 <p style={{marginRight:'10px'}}>{track.name}</p>

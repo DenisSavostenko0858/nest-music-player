@@ -46,7 +46,7 @@ const AudioPlayer = () => {
                 <CardMedia
                     component="img"
                     sx={{ width: 121 }}
-                    image="http://localhost:5000/image/4dae95f3-c5a4-4145-ba74-fdf2ca66be03.jpg"
+                    image=""
                     alt="Live from space album cover"
                 />
                 <CardContent sx={{ flex: '1 0 auto' }}>
@@ -80,7 +80,7 @@ const AudioPlayer = () => {
                     </IconButton>
                 </Box>
             </Box>
-            <audio ref={audioRef} src="http://localhost:5000/audio/492a4394-c4cf-4f08-82ff-93ff2a84d81e.mp3" preload="auto" />
+            <audio ref={audioRef} />
         </Card>
     );
 };

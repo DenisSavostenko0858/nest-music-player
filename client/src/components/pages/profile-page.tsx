@@ -1,11 +1,11 @@
 import '../../styles/home-page.css'
-
+import '../../styles/profile.css'
+import UserProfile from "../UserServices/UserProfile.tsx";
 function ProfilePage(){
     return (
         <>
             <div className="container">
-                <h1 className="logo">Profile Page</h1>
-                <h2 className="logo">Добро пожаловать</h2>
+                <UserProfile/>
             </div>
         </>
     )

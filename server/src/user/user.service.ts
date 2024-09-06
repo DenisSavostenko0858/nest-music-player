@@ -80,7 +80,11 @@ export class UserService {
     return this.prisma.user.findUnique({
       where: { id },
       include:{
-        comments: true
+        comments: {
+          include: {
+            music: true,
+          }
+        }
       }
     })
   }
