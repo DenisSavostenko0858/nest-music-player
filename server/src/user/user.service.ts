@@ -88,11 +88,43 @@ export class UserService {
       }
     })
   }
-  //
-  // async update(id: number, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
-  //
+  
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const { name, email, password } = updateUserDto;
+  
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+  
+    if (!user) {
+      throw new Error('Пользователь не найден');
+    }
+  
+    const dataToUpdate: any = {};
+    if (name) dataToUpdate.name = name;
+    if (email) {
+      const existingUser = await this.prisma.user.findUnique({
+        where: { email },
+      });
+      
+      if (existingUser && existingUser.id !== id) {
+        throw new Error('Данные почты уже были зарегистрированы!');
+      }
+      dataToUpdate.email = email;
+    }
+    if (password) {
+      dataToUpdate.password = await bcrypt.hash(password, 12);
+    }
+  
+    // Обновляем пользователя
+    const updatedUser = await this.prisma.user.update({
+      where: { id },
+      data: dataToUpdate,
+    });
+  
+    return updatedUser;
+  }
+  
   // async remove(id: number) {
   //   return `This action removes a #${id} user`;
   // }
