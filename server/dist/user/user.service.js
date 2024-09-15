@@ -76,6 +76,39 @@ let UserService = class UserService {
             }
         });
     }
+    async update(id, updateUserDto) {
+        const { name, email, password, about, age, lastName } = updateUserDto;
+        const user = await this.prisma.user.findUnique({
+            where: { id },
+        });
+        if (!user) {
+            throw new Error('Пользователь не найден');
+        }
+        const newDateUser = {};
+        if (name)
+            newDateUser.name = name;
+        if (lastName)
+            newDateUser.lastName = lastName;
+        if (about)
+            newDateUser.about = about;
+        if (email) {
+            const existingUser = await this.prisma.user.findUnique({
+                where: { email },
+            });
+            if (existingUser && existingUser.id !== id) {
+                throw new Error('Данные почты уже были зарегистрированы!');
+            }
+            newDateUser.email = email;
+        }
+        if (password) {
+            newDateUser.password = await bcrypt.hash(password, 12);
+        }
+        const updatedUser = await this.prisma.user.update({
+            where: { id },
+            data: newDateUser,
+        });
+        return updatedUser;
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

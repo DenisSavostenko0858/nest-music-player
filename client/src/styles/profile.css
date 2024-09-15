@@ -47,3 +47,23 @@
     color: white;
     font-weight: bold;
 }
+.btn-edit-profile{
+    background-color: #242424;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 15px;
+
+    transition: 0.2s;
+}
+.btn-edit-profile:hover{
+    background-color: rgb(183, 0, 0);
+
+    transition: 0.2s;
+}

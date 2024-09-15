@@ -5,5 +5,14 @@ export interface UserInterface {
     password: string;
     lastName: string;
     about: string;
-    comments: [];
+    comments: [
+        {
+            id: number;
+            music:{
+                name: string;
+            }
+            text: string;
+            rating: number;
+        }
+    ];
 }

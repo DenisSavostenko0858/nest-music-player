@@ -90,7 +90,7 @@ export class UserService {
   }
   
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const { name, email, password } = updateUserDto;
+    const { name, email, password, about, age, lastName } = updateUserDto;
   
     const user = await this.prisma.user.findUnique({
       where: { id },
@@ -100,8 +100,17 @@ export class UserService {
       throw new Error('Пользователь не найден');
     }
   
-    const dataToUpdate: any = {};
-    if (name) dataToUpdate.name = name;
+    const newDateUser: any = {};
+    
+    // Добавления данных в объект
+    if (name) newDateUser.name = name;
+    
+    if (lastName) newDateUser.lastName = lastName;
+
+    if (about) newDateUser.about = about;
+
+    // if (age) newDateUser.age = age;
+    
     if (email) {
       const existingUser = await this.prisma.user.findUnique({
         where: { email },
@@ -110,16 +119,16 @@ export class UserService {
       if (existingUser && existingUser.id !== id) {
         throw new Error('Данные почты уже были зарегистрированы!');
       }
-      dataToUpdate.email = email;
+      newDateUser.email = email;
     }
+
     if (password) {
-      dataToUpdate.password = await bcrypt.hash(password, 12);
+      newDateUser.password = await bcrypt.hash(password, 12);
     }
-  
-    // Обновляем пользователя
+
     const updatedUser = await this.prisma.user.update({
       where: { id },
-      data: dataToUpdate,
+      data: newDateUser,
     });
   
     return updatedUser;

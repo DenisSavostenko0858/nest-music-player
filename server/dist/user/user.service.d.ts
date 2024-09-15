@@ -73,4 +73,13 @@ export declare class UserService {
         age: Date | null;
         about: string | null;
     }>;
+    update(id: number, updateUserDto: UpdateUserDto): Promise<{
+        id: number;
+        name: string;
+        email: string;
+        password: string;
+        lastName: string | null;
+        age: Date | null;
+        about: string | null;
+    }>;
 }

@@ -22,3 +22,9 @@ export const check = async (): Promise<any> => {
 export const logout = (): void => {
     localStorage.removeItem('token');
 };
+
+// Обновление пользовательстих данных
+export const updateNewUserDate = async (name: string, email: string, about: string, lastName: string, id:any): Promise<any> => {
+    const { data } = await $host.patch(`user/${id}`, {name, email, about, lastName});
+    return data;
+};

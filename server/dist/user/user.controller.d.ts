@@ -72,4 +72,13 @@ export declare class UserController {
     checkUser(updateUserDto: UpdateUserDto): Promise<{
         token: any;
     }>;
+    update(id: string, updateUserDto: UpdateUserDto): Promise<{
+        id: number;
+        name: string;
+        email: string;
+        password: string;
+        lastName: string | null;
+        age: Date | null;
+        about: string | null;
+    }>;
 }
